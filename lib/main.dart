@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:selling_electronics/core/controllers/blocobserver.dart';
+import 'package:selling_electronics/core/controllers/cubits/app_cubit/cubit.dart';
+import 'package:selling_electronics/core/controllers/cubits/cart_cubit/cubit.dart';
+import 'package:selling_electronics/screens/modules/app_layout/app_layout.dart';
 import 'package:selling_electronics/screens/modules/login/login_screen.dart';
 import 'package:selling_electronics/screens/modules/on_boarding/on_boarding_screen.dart';
-import 'package:selling_electronics/screens/modules/products/prducts_screen.dart';
+import 'core/controllers/cubits/favorite_cubit/cubit.dart';
 import 'core/controllers/cubits/product_cubit/cubit.dart';
 import 'core/managers/styles/themes.dart';
 import 'core/managers/variables/values.dart';
@@ -28,7 +31,7 @@ void main() async{
 
   if(boarding != null ){
     if(token != null) {
-      startWidget = const ProductScreen();
+      startWidget = const AppLayout();
     }else{
       startWidget = LoginScreen();
     }
@@ -51,6 +54,15 @@ class SellingElectronics extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (BuildContext context) =>ProductCubit()..getHomeProducts()
+        ),
+        BlocProvider(
+            create: (BuildContext context) =>AppCubit()
+        ),
+        BlocProvider(
+            create: (BuildContext context) =>CartCubit()..getCart(),
+        ),
+        BlocProvider(
+            create: (BuildContext context) =>FavoriteCubit()..getFavorites(),
         ),
       ],
       child: MaterialApp(

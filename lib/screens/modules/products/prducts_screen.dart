@@ -1,11 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:selling_electronics/core/controllers/cubits/favorite_cubit/cubit.dart';
+import 'package:selling_electronics/core/controllers/cubits/favorite_cubit/state.dart';
+import '../../../core/controllers/cubits/cart_cubit/cubit.dart';
+import '../../../core/controllers/cubits/cart_cubit/states.dart';
 import '../../../core/controllers/cubits/product_cubit/cubit.dart';
 import '../../../core/controllers/cubits/product_cubit/states.dart';
-import '../../../core/managers/styles/colors.dart';
-import '../../widgets/build_logout.dart';
 import '../../widgets/build_product_item.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -13,33 +13,16 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProductCubit,ProductStates>(listener:(context,state){},builder:(context,state){
+    return BlocConsumer<ProductCubit,ProductStates>(
+      listener:(context,state){},builder:(context,state){
       var cubit  = ProductCubit.get(context);
-      if(cubit.laptopsModel==null){
-        return Scaffold(
-          appBar: AppBar(
-            title:const Text('Products'),
-          ),
-          body: const Center(child: CircularProgressIndicator()),
+      // ignore: unrelated_type_equality_checks
+      if(cubit.laptopsModel==null && CartCubit.get(context).state != GetCartSuccessState && FavoriteCubit.get(context).state != GetFavoritesSuccessState ){
+        return const Scaffold(
+          body: Center(child: CircularProgressIndicator()),
         );
       }
       return Scaffold(
-        appBar: AppBar(title: const Text(
-            'Products'
-        ),
-          actions: [
-            InkWell(
-                onTap: () {signOut(context);},
-                child: const Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: Icon(
-                    Icons.logout,
-                    color: defaultColor,
-                    size: 32,
-                  ),
-                )),
-          ],
-        ),
         body:SingleChildScrollView(child:
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +31,7 @@ class ProductScreen extends StatelessWidget {
             Container(
               color: Colors.transparent,
               child: GridView.count(
-                childAspectRatio: 1 / 1.3,
+                childAspectRatio: 1 / 1.6,
                 mainAxisSpacing: 1.0,
                 crossAxisSpacing: 1.0,
                 physics: const NeverScrollableScrollPhysics(),

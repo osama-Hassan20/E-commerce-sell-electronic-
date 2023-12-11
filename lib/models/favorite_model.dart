@@ -1,23 +1,21 @@
-class LaptopsModel{
+class FavoritesModel {
   String? status;
-  String? message;
-  List<Product>? product;
+  List<FavoriteProducts>? favoriteProducts;
 
-  LaptopsModel({this.status, this.message, this.product});
+  FavoritesModel({this.status, this.favoriteProducts});
 
-  LaptopsModel.fromJson(Map<String, dynamic> json) {
+  FavoritesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    message = json['message'];
-    if (json['product'] != null) {
-      product = <Product>[];
-      json['product'].forEach((v) {
-        product!.add( Product.fromJson(v));
+    if (json['favoriteProducts'] != null) {
+      favoriteProducts = <FavoriteProducts>[];
+      json['favoriteProducts'].forEach((v) {
+        favoriteProducts!.add(FavoriteProducts.fromJson(v));
       });
     }
   }
 }
 
-class Product {
+class FavoriteProducts {
   String? sId;
   String? status;
   String? category;
@@ -25,13 +23,13 @@ class Product {
   dynamic price;
   String? description;
   String? image;
+  List<String>? images;
   String? company;
   dynamic countInStock;
-  List<String>? images;
   dynamic iV;
   dynamic sales;
 
-  Product(
+  FavoriteProducts(
       {this.sId,
         this.status,
         this.category,
@@ -39,13 +37,13 @@ class Product {
         this.price,
         this.description,
         this.image,
+        this.images,
         this.company,
         this.countInStock,
         this.iV,
-        this.sales,
-      });
+        this.sales});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  FavoriteProducts.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     status = json['status'];
     category = json['category'];
@@ -53,11 +51,10 @@ class Product {
     price = json['price'];
     description = json['description'];
     image = json['image'];
-    company = json['company'];
     images = json['images'].cast<String>();
+    company = json['company'];
     countInStock = json['countInStock'];
     iV = json['__v'];
     sales = json['sales'];
   }
-
 }

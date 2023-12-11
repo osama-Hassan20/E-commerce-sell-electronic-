@@ -20,6 +20,9 @@ class DioHelper
 
   static Future<Response> getData({
     required String url,
+    Map<String, dynamic>? query,
+    Map<String,dynamic>?data,
+    String lang = 'ar',
     String? token,
   })async
   {
@@ -27,11 +30,14 @@ class DioHelper
     {
       'Content-TypType':'application/json',
       'Accept':'*/*',
+      'lang': 'en',
       'Connection':'keep-alive',
       'Authorization':token??' ',
     };
     return await dio!.get(
-      url,
+        url,
+        queryParameters: query,
+        data: data
 
     );
   }

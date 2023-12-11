@@ -1,23 +1,19 @@
-class LaptopsModel{
-  String? status;
-  String? message;
-  List<Product>? product;
+class CartModel{
+  List<CartProducts>? products;
 
-  LaptopsModel({this.status, this.message, this.product});
+  CartModel({this.products});
 
-  LaptopsModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    if (json['product'] != null) {
-      product = <Product>[];
-      json['product'].forEach((v) {
-        product!.add( Product.fromJson(v));
+  CartModel.fromJson(Map<String, dynamic> json) {
+    if (json['products'] != null) {
+      products = <CartProducts>[];
+      json['products'].forEach((v) {
+        products!.add(CartProducts.fromJson(v));
       });
     }
   }
 }
 
-class Product {
+class CartProducts {
   String? sId;
   String? status;
   String? category;
@@ -26,12 +22,12 @@ class Product {
   String? description;
   String? image;
   String? company;
-  dynamic countInStock;
-  List<String>? images;
-  dynamic iV;
-  dynamic sales;
+  int? countInStock;
+  int? iV;
+  dynamic quantity;
+  dynamic totalPrice;
 
-  Product(
+  CartProducts(
       {this.sId,
         this.status,
         this.category,
@@ -42,10 +38,10 @@ class Product {
         this.company,
         this.countInStock,
         this.iV,
-        this.sales,
-      });
+        this.quantity,
+        this.totalPrice});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  CartProducts.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     status = json['status'];
     category = json['category'];
@@ -54,10 +50,9 @@ class Product {
     description = json['description'];
     image = json['image'];
     company = json['company'];
-    images = json['images'].cast<String>();
     countInStock = json['countInStock'];
     iV = json['__v'];
-    sales = json['sales'];
+    quantity = json['quantity'];
+    totalPrice = json['totalPrice'];
   }
-
 }
