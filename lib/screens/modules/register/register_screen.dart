@@ -11,6 +11,7 @@ import '../../../core/managers/widgets/navigate.dart';
 import '../../../core/managers/widgets/show_toast.dart';
 import '../../../core/managers/variables/values.dart';
 import '../../../core/network/local/cache_helper.dart';
+import '../app_layout/app_layout.dart';
 import '../products/prducts_screen.dart';
 
 // ignore: must_be_immutable
@@ -49,7 +50,7 @@ class RegisterScreen extends StatelessWidget {
               ).then((value) {
                 token = state.registerModel.user!.token;
                 print('token token = $token');
-                navigateAndFinish(context,  const ProductScreen());
+                navigateAndFinish(context,  const AppLayout());
               });
             } else {
               print(state.registerModel.message);

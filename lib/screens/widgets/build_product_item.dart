@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:selling_electronics/core/controllers/cubits/product_cubit/cubit.dart';
 import 'package:selling_electronics/core/managers/styles/colors.dart';
 import 'package:selling_electronics/core/managers/widgets/navigate.dart';
@@ -10,8 +11,6 @@ import '../../core/controllers/cubits/cart_cubit/cubit.dart';
 import '../../core/controllers/cubits/cart_cubit/states.dart';
 import '../../core/controllers/cubits/favorite_cubit/cubit.dart';
 import '../../core/controllers/cubits/favorite_cubit/state.dart';
-import '../../core/managers/variables/values.dart';
-import '../../models/product_model.dart';
 
 Widget buildProductItem(dynamic product, context) => InkWell(
       onTap: () {
@@ -64,15 +63,20 @@ Widget buildProductItem(dynamic product, context) => InkWell(
                                 imageUrl: product.image!,
                                 imageBuilder: (context, imageProvider) =>
                                     Image(image: imageProvider),
-                                placeholder: (context, url) => const Center(
-                                      child: CircularProgressIndicator(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                errorWidget: (context, url, error) {
+                                placeholder: (context, url) => Center(
+                                  child: LoadingAnimationWidget
+                                              .staggeredDotsWave(
+                                            color: defaultColor,
+                                            size: 50,
+                                          ),
+                                        ),
+                                    errorWidget: (context, url, error) {
                                   print(error.toString());
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
+                                  return Center(
+                                    child: LoadingAnimationWidget.staggeredDotsWave(
+                                      color: defaultColor,
+                                      size: 50,
+                                    ),
                                   );
                                 }),
                           ),

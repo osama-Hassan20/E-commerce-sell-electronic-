@@ -46,6 +46,7 @@ dependencies:
   conditional_builder_null_safety:
   image_picker:
   hexcolor:
+  loading_animation_widget:
   cached_network_image:
 
 

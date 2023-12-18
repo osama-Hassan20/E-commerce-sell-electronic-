@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:selling_electronics/core/managers/widgets/default_button.dart';
-
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:selling_electronics/core/managers/styles/colors.dart';
 import '../../../core/controllers/cubits/cart_cubit/cubit.dart';
 import '../../../core/controllers/cubits/cart_cubit/states.dart';
 import '../../widgets/build_cart_item.dart';
 import '../../widgets/check_out.dart';
+import '../../widgets/custom_empty_item.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -20,12 +20,19 @@ class CartScreen extends StatelessWidget {
         final Size size = MediaQuery.of(context).size;
 
         if (cubit.cartModel == null) {
-          return Center(child: CircularProgressIndicator());
+          // return Center(child: CircularProgressIndicator());
+          return Center(
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: defaultColor,
+              size: 50,
+            ),
+          );
         }
         return Scaffold(
-          backgroundColor: Colors.grey[200],
           floatingActionButton:
-              checkoutButton(width: size.width - 75, function: () {},context: context),
+              checkoutButton(width: size.width - 75, function: () {
+                // navigateTo(context, ShimmerPage());
+              },context: context),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
@@ -43,11 +50,7 @@ class CartScreen extends StatelessWidget {
                             ),
                         itemCount: cubit.cartModel!.products!.length,),
                   if (cubit.cartModel!.products!.isEmpty)
-                    const Center(
-                      child: Text(
-                        'Cart Is Empty',
-                      ),
-                    ),
+                    const CustomEmpty(itemName: 'Favorite', icon: Icons.favorite),
                   const SizedBox(
                     height: 20,
                   ),

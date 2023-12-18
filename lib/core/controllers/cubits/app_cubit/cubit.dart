@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:selling_electronics/core/controllers/cubits/app_cubit/state.dart';
 
-import '../../../../screens/modules/account/account_screen.dart';
 import '../../../../screens/modules/cart/cart_screen.dart';
 import '../../../../screens/modules/favorite/favorite_screen.dart';
 import '../../../../screens/modules/products/prducts_screen.dart';
+import '../../../../screens/modules/profile/profile_screen.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super (AppInitialState());
@@ -18,7 +18,7 @@ class AppCubit extends Cubit<AppStates> {
   [
     const ProductScreen(),
     const FavoriteScreen(),
-    const AccountScreen(),
+    const ProfileScreen(),
     const CartScreen(),
   ];
 

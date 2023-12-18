@@ -15,56 +15,46 @@ class AppLayout extends StatelessWidget {
       listener: (context , state){},
       builder: (context , state){
         var cubit = AppCubit.get(context);
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: Text(cubit.titles[cubit.currentIndex],style: const TextStyle(color: Colors.black),),
-            actions: [
-              InkWell(
-                  onTap: () {signOut(context);},
-                  child: const Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Icon(
-                      Icons.logout,
-                      color: defaultColor,
-                      size: 32,
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Text(cubit.titles[cubit.currentIndex],style: const TextStyle(color: Colors.black),),
+            ),
+            body: cubit.bottomScreens[cubit.currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: (index){
+                cubit.changeBottom(index);
+              },
+              currentIndex:cubit.currentIndex ,
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(
+                        Icons.home,
                     ),
-                  )),
-            ],
-          ),
-          body: cubit.bottomScreens[cubit.currentIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (index){
-              cubit.changeBottom(index);
-            },
-            currentIndex:cubit.currentIndex ,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                      Icons.home,
-                  ),
-                label: 'Home'
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.favorite,
-                  ),
-                  label: 'Favorite'
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.person,
-                  ),
-                  label: 'Account'
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.shopping_cart,
-                  ),
-                  label: 'Cart'
-              ),
-            ],
+                  label: 'Home'
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.favorite,
+                    ),
+                    label: 'Favorite'
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.person,
+                    ),
+                    label: 'Account'
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.shopping_cart,
+                    ),
+                    label: 'Cart'
+                ),
+              ],
+            ),
           ),
         );
       },

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../../core/controllers/cubits/cart_cubit/cubit.dart';
-import '../../core/managers/variables/values.dart';
 import '../../models/cart_model.dart';
+
 Widget buildCartItem(CartProducts cartProducts,context) => Container(
   width: double.infinity,
   height: 150,

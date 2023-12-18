@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:selling_electronics/core/managers/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -30,15 +31,18 @@ class BuildProductDetailsItem extends StatelessWidget {
                       imageUrl: product.images![index],
                       imageBuilder: (context, imageProvider) =>
                           Image(image: imageProvider),
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.black,
-                        ),
-                      ),
+                      placeholder: (context, url) => Center(
+                          child: LoadingAnimationWidget.staggeredDotsWave(
+                            color: defaultColor,
+                            size: 50,
+                          ),),
                       errorWidget: (context, url, error) {
                         print(error.toString());
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return  Center(
+                          child: LoadingAnimationWidget.staggeredDotsWave(
+                            color: defaultColor,
+                            size: 50,
+                          ),
                         );
                       }),
                 ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:selling_electronics/screens/widgets/custom_empty_item.dart';
 import '../../../core/controllers/cubits/favorite_cubit/cubit.dart';
 import '../../../core/controllers/cubits/favorite_cubit/state.dart';
+import '../../../core/managers/styles/colors.dart';
 import '../../widgets/build_product_item.dart';
 import '../../widgets/check_out.dart';
 
@@ -17,10 +20,16 @@ class FavoriteScreen extends StatelessWidget {
         final Size size = MediaQuery.of(context).size;
 
         if (cubit.favoritesModel == null) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: defaultColor,
+              size: 50,
+            ),
+          );
         }
         return Scaffold(
-          body:SingleChildScrollView(child:
+          body:SingleChildScrollView(
+            child:
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -42,11 +51,8 @@ class FavoriteScreen extends StatelessWidget {
                 ),
               ),
               if (cubit.favoritesModel!.favoriteProducts!.isEmpty)
-                const Center(
-                  child: Text(
-                    'Cart Is Empty',
-                  ),
-                ),
+                const CustomEmpty(itemName: 'Favorite', icon: Icons.favorite),
+
             ],
           ),),
         );

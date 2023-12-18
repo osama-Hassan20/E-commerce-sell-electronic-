@@ -13,6 +13,7 @@ import '../../../core/managers/widgets/navigate.dart';
 import '../../../core/managers/widgets/show_toast.dart';
 import '../../../core/managers/variables/values.dart';
 import '../../../core/network/local/cache_helper.dart';
+import '../app_layout/app_layout.dart';
 
 
 // ignore: must_be_immutable
@@ -39,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                 value: state.loginModel.user?.token,
               ).then((value) {
                 token = state.loginModel.user!.token!;
-                navigateAndFinish(context, const ProductScreen());
+                navigateAndFinish(context, const AppLayout());
               });
             }
             else {

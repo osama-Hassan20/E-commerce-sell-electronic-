@@ -8,4 +8,6 @@ class EndPoint{
   static String deleteCartApi='cart/delete';
   static String updateCartApi='cart';
   static String favoriteApi='favorite';
+  static String userProfileApi='user/profile';
+  static String updateUserProfileApi='user/update';
 }

@@ -10,6 +10,7 @@ import 'package:selling_electronics/screens/modules/login/login_screen.dart';
 import 'package:selling_electronics/screens/modules/on_boarding/on_boarding_screen.dart';
 import 'core/controllers/cubits/favorite_cubit/cubit.dart';
 import 'core/controllers/cubits/product_cubit/cubit.dart';
+import 'core/controllers/cubits/profile_cubit/cubit.dart';
 import 'core/managers/styles/themes.dart';
 import 'core/managers/variables/values.dart';
 import 'core/network/local/cache_helper.dart';
@@ -54,6 +55,9 @@ class SellingElectronics extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (BuildContext context) =>ProductCubit()..getHomeProducts()
+        ),
+        BlocProvider(
+            create: (BuildContext context) =>ProfileCubit()..getProfile()
         ),
         BlocProvider(
             create: (BuildContext context) =>AppCubit()

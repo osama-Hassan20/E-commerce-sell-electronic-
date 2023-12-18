@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:selling_electronics/core/controllers/cubits/favorite_cubit/cubit.dart';
 import 'package:selling_electronics/core/controllers/cubits/favorite_cubit/state.dart';
 import '../../../core/controllers/cubits/cart_cubit/cubit.dart';
 import '../../../core/controllers/cubits/cart_cubit/states.dart';
 import '../../../core/controllers/cubits/product_cubit/cubit.dart';
 import '../../../core/controllers/cubits/product_cubit/states.dart';
+import '../../../core/managers/styles/colors.dart';
 import '../../widgets/build_product_item.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -18,8 +20,13 @@ class ProductScreen extends StatelessWidget {
       var cubit  = ProductCubit.get(context);
       // ignore: unrelated_type_equality_checks
       if(cubit.laptopsModel==null && CartCubit.get(context).state != GetCartSuccessState && FavoriteCubit.get(context).state != GetFavoritesSuccessState ){
-        return const Scaffold(
-          body: Center(child: CircularProgressIndicator()),
+        return  Scaffold(
+          body: Center(
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: defaultColor,
+              size: 50,
+            ),
+          )
         );
       }
       return Scaffold(
